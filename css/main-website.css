@@ -1,0 +1,272 @@
+/*!
+ * Start Bootstrap - Modern Business (https://startbootstrap.com/template-overviews/modern-business)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
+ */
+
+ .rgba-black-slight,
+.rgba-black-slight:after {
+  background-color: rgba(0, 0, 0, 0.1); }
+
+.rgba-black-light,
+.rgba-black-light:after {
+  background-color: rgba(0, 0, 0, 0.3); }
+
+.rgba-black-strong,
+.rgba-black-strong:after {
+  background-color: rgba(0, 0, 0, 0.7); }
+
+  .view {
+  position: relative;
+  overflow: hidden;
+  cursor: default; }
+  .view .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed; }
+  .view img, .view video {
+    position: relative;
+    display: block; }
+  .view video.video-intro {
+    z-index: -100;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transition: 1s opacity;
+    -o-transition: 1s opacity;
+    transition: 1s opacity;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto; }
+
+.overlay .mask {
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out; }
+  .overlay .mask:hover {
+    opacity: 1; }
+
+ .link-barra-nav{
+  font-size: 14px;
+ }
+
+.crop-image-header {
+  width: 1350px;
+  height: 805px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.crop-image-postagens {
+  width: 520px;
+  height: 210px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.crop-image-post {
+  width: 815px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.crop-image-diretor {
+  width: 350px;
+  height: 215px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.crop-image-comentario {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.crop-image-post-index {
+  width: 350px;
+  height: 205px;
+  object-fit: cover;
+  object-position: center;
+}
+
+body {
+  padding-top: 54px;
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.carousel-item {
+  height: 65vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.btn, a.btn {
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  font-family: 'Montserrat', arial, sans-serif;
+  padding: 8px 16px;
+  font-weight: bold;
+}
+
+.btn .svg-inline--fa, a.btn .svg-inline--fa {
+  margin-right: 5px;
+}
+
+.btn:focus, a.btn:focus {
+  color: #fff;
+}
+
+a{
+  color:rgb(115, 170, 94);
+}
+
+a:hover {
+  text-decoration: none;
+  color: rgb(75, 128, 54);
+}
+
+a.btn-primary, .btn-primary {
+  background: #4f8d2c;
+  border: 1px solid #4f8d2c;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+a.btn-primary:hover, .btn-primary:hover {
+  background: #87bd68;
+  border: 1px solid #87bd68;
+  color: #fff;
+}
+
+a.btn-secondary, .btn-secondary {
+  background: #d82a2a;
+  border: 1px solid #d82a2a;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+a.btn-secondary:hover, .btn-secondary:hover {
+  background: #f16464;
+  border: 1px solid #f16464;
+  color: #fff;
+}
+
+#navLink{
+  color:rgb(76, 136, 54);
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.navLink a:hover{
+  color:rgb(66, 122, 44);
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+h1, h2, h3, h4, h5, h6{
+  color:rgb(66, 122, 44);
+  font-weight: bold;
+}
+
+.navbar{
+  background-color: white;
+  box-shadow: 5px;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.footer {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: rgb(86, 150, 61);
+  color: #fff;
+}
+
+.footer h4{
+  color:white;
+}
+
+.footer p{
+  font-family: Lato, Helvetica, sans-serif;
+}
+
+.footer a{
+  color:rgb(255, 255, 255);
+}
+
+.copyright {
+  background-color: rgb(48, 85, 34);
+}
+
+.btn-social {
+  border-radius: 100%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  font-size: 1.25rem;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.item:after {
+  content:"";
+  display:block;
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(0,0,0,0.2);
+}
+
+.bg-image-full {
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
