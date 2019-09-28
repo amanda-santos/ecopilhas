@@ -112,12 +112,12 @@ session_start();
 
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
-      <div class="carousel-item active">
+      <div class="carousel-item">
         <div class="carousel-item">
           <div class="view" style="background-position: center; background-image: url('imagens/mascote-ecopilhas.jpg'); background-repeat: no-repeat; background-size: cover;">
 
-            <div class="d-flex justify-content-center align-items-center">
-              <div class="col-12 text-center white-text mx-5 wow fadeIn">
+          <div class="mask d-flex justify-content-center align-items-end">
+            <div class="col-12 text-center white-text mx-5 wow fadeIn" style="background-color: rgba(0, 0, 0, 0.7)">
                 <h1 style="color:white;" class="mb-4">
                   <strong>Titulo</strong>
                 </h1>

@@ -3,11 +3,12 @@
       </div>
       <!-- /.container-fluid -->
 
-      <!--início do modal para edição do footer-->
+      <!--início do modal para edição do footer
       <div class="modal fade bd-example-modal-sm" id="editarFooter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
 
         <?php
+            /*
             $sqlFooter = "SELECT conteudo FROM itemsite WHERE idItemSite = 3;";
             $resultFooter = $con->query($sqlFooter);
             if ($resultFooter->num_rows > 0){
@@ -15,6 +16,7 @@
                 $footer = $exibirFooter["conteudo"];
               } //fim while
             } //fim if
+            */
           ?>
 
         <div class="modal-content">
@@ -47,23 +49,14 @@
         </div>
         </div>
       </div>
-      <!--fim do modal para edição do footer-->
+      fim do modal para edição do footer-->
 
-      <!-- Sticky Footer -->
+      <!-- footer -->
       <footer class="sticky-footer">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span><?php echo $footer;?></span>
-            <?php
-              if (isset($_SESSION['login'])){
-
-                if (($_SESSION['tipo'] != 'socio') && ($_SESSION['tipo'] != 'dependente')) { 
-              ?>
-                    <i><a href="" data-toggle="modal" data-target="#editarFooter"><i class="far fa-edit"></i> </i></a>
-              <?php    
-                }
-              }
-            ?>
+            <span>Copyright: EcoPilhas 2019</span>
+                <i><a href="" data-toggle="modal" data-target="#editarFooter"><i class="far fa-edit"></i> </i></a>
           </div>
         </div>
       </footer>
@@ -74,7 +67,7 @@
   </div>
   <!-- /#wrapper -->
 
-  <!-- Scroll to Top Button-->
+  <!-- botão para rolar para cima -->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
@@ -129,57 +122,26 @@
   });
   </script>
 
-  <!-- table export 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-   
-  <script type="text/javascript">
-      $(document).ready(function() {
-      $('#dataTable').DataTable( {
-          dom: 'Bfrtip',
-          buttons: [
-              'copyHtml5',
-              'excelHtml5',
-              'csvHtml5',
-              'pdfHtml5'
-          ]
-      } );
-  } );
-  </script>-->
-
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js" integrity="sha256-arMsf+3JJK2LoTGqxfnuJPFTU4hAK57MtIPdFpiHXOU=" crossorigin="anonymous"></script>
-  -->
   <script src="js/validator.min.js"></script>
 
-  <script src="js\mascara.js"></script>
-  <script src="js\buscaCep.js"></script>
-
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor-admin-website/jquery/jquery.min.js"></script>
-  <script src="vendor-admin-website/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor-admin-website/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="vendor-admin-website/chart.js/Chart.min.js"></script>
-  <script src="vendor-admin-website/datatables/jquery.dataTables.js"></script>
-  <script src="vendor-admin-website/datatables/dataTables.bootstrap4.js"></script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="js/chart-pie-ativos-inativos.js"></script>
-  <script src="js/chart-pie-situacao.js"></script>
+  <script src="js/demo/datatables-demo.js"></script>
+  <script src="js/demo/chart-area-demo.js"></script>
 </body>
 
 </html>
