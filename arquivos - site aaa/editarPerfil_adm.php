@@ -122,7 +122,7 @@ if (isset($_SESSION['login'])){
       <button type="submit" name="atualizePerfil" class="btn btn-primary">Atualizar</button>
     </div>
 
-    <div class="col-4 float-right">
+    <div class="col-lg-4 col-sm-8 col-md-8 float-right">
       <a class = "btn btn-primary" href = "editarSenha_adm.php?login=<?php echo $login; ?>"><i class="fas fa-lock"></i> Editar Senha</a>
 
       <?php 

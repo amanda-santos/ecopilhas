@@ -14,6 +14,7 @@ if (isset($_POST["atualizar"])) {
     $email = addslashes($_POST['email']);
     $nomeSite = addslashes($_POST['nomeSite']);
     $tipo = $_POST['tipo'];
+    $ativo = $_POST['ativo'];
 
     $sqlValidacao = "SELECT * FROM Usuario 
                         WHERE idUsuario != '" . $idUsuario . "' 
@@ -29,11 +30,11 @@ if (isset($_POST["atualizar"])) {
     }
 
     $sql = 'UPDATE Usuario 
-                SET nome = "' . $nome . '", sobrenome = "' . $sobrenome . '", usuario = "' . $usuario . '", email = "' . $email . '", TipoUsuario_idTipoUsuario = ' . $tipo . ', nomeSite = "' . $nomeSite . '"
+                SET nome = "' . $nome . '", sobrenome = "' . $sobrenome . '", usuario = "' . $usuario . '", email = "' . $email . '", TipoUsuario_idTipoUsuario = ' . $tipo . ', nomeSite = "' . $nomeSite . '", ativo= '.$ativo.'
                 WHERE idUsuario = ' . $idUsuario . ';';
 
     if ($con->query($sql) == true) {
-        echo "<script language='javascript' type='text/javascript'>alert('Atualização realizada com sucesso!');javascript:history.go(-1);</script>";    
+        echo "<script language='javascript' type='text/javascript'>alert('Atualização realizada com sucesso!');window.location.href='exibirUsuarios.php';</script>";
     } else {
         echo "<script language='javascript' type='text/javascript'>alert('Erro ao atualizar!');</script>";
         echo "Error: " . $sql . "<br>" . mysqli_error($con);

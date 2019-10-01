@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
   <li class="breadcrumb-item active">Editar Perfil Administrativo</li>
 </ol>
 
-<form enctype="multipart/form-data" role="form" data-toggle="validator" action="atualizarUsuario.php?idUsuario=<?php echo $id; ?>" method="post">
+<form enctype="multipart/form-data" role="form" data-toggle="validator" action="atualizarUsuarioAdmin.php?idUsuario=<?php echo $id; ?>" method="post">
 
     <div class="card mb-3">
       <a href="#dados" style="text-decoration: none" class="d-block card-header" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="dados">
@@ -87,14 +87,14 @@ if ($result->num_rows > 0) {
 
           <div class="form-row">
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="nomeSite">
                 Nome a ser exibido em postagens <span title="obrigatório">*</span>
               </label>
               <input value="<?php echo $nomeSite; ?>" type="text" class="form-control" id="nomeSite" placeholder="Nome a ser exibido em postagens" name="nomeSite" required value="Associação dos Aposentados e Pensionistas de Ouro Branco">
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="tipo">
                 Nível de Acesso
               </label>
@@ -117,30 +117,33 @@ if ($result->num_rows > 0) {
               </select>
             </div>
 
+            <div class="form-group col-md-4">
+              <label for="tipo">
+                Situação
+              </label>
+              <select class="form-control" id="ativo" required="required" name="ativo">
+                <?php
+                  if ($ativo == 1){ 
+                ?>
+                    <option selected value="1">Ativo</option>
+                    <option value="0">Inativo</option>
+                <?php
+                  }else{
+                ?>
+                    <option value="1">Ativo</option>
+                    <option selected value="0">Inativo</option>
+                <?php
+                  }
+                ?>
+              </select>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row">
-
-      <div class="col-8">
-        <button type="submit" name="atualizar" class="btn btn-primary">Atualizar</button>
-      </div>
-
-      <div class="col-lg-4 col-sm-8 col-md-8 float-right">
-        <a class = "btn btn-primary" href = "editarSenha.php?idUsuario=<?php echo $id; ?>"><i class="fas fa-lock"></i> Editar Senha</a>
-        
-        <?php 
-        if ($ativo == 1){
-        ?>
-          <a class="btn btn-danger" href="#" onclick="inativar('<?php echo $id; ?>');"><i class="fas fa-user-slash"></i> Inativar Perfil</a>
-        <?php
-        }
-        ?>
-      </div>
-
-    </div>
+    <button type="submit" name="atualizar" class="btn btn-primary">Atualizar</button>
 </form>
 
 <!--início função inativar usuário-->
