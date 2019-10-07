@@ -8,10 +8,10 @@
     //recebe os valores enviados pelo formulário
     $senha = $_POST['senha'];
 
-    $sql = 'UPDATE usuario SET senha="' . $senha .'" WHERE idUsuario = ' . $id . ';';
+    $sql = 'UPDATE ecopilhas.Usuario SET senha="' . $senha .'" WHERE idUsuario = ' . $id . ';';
     if ($con->query($sql) === true) {
       echo "<script language='javascript' type='text/javascript'>alert('Senha atualizada com sucesso!');</script>";
-      echo "<script>window.location = 'login.php';</script>";
+      echo "<script>window.location = 'login.html';</script>";
       die();
     } else {
       $errMSG = "1 error while inserting....2";
