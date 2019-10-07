@@ -1,7 +1,7 @@
 <?php 
   include ("conexao.php");
   //Caso o usuário não esteja autenticado, limpa os dados e redireciona
-  /*if (!isset($_SESSION['login']) and ! isset($_SESSION['senha'])) {
+  if (!isset($_SESSION['login']) and ! isset($_SESSION['senha'])) {
       //Redireciona para a página de autenticação
       echo"<script language='javascript' type='text/javascript'>alert('Para acessar esta página é preciso fazer login.');window.location.href='index.php';</script>";
       die();
@@ -9,13 +9,7 @@
     session_start();
     include("testaAdmin.php");
     $tipo = $_SESSION["tipo"];
-  }*/
-  session_start();
-  $_SESSION['id'] = 1;
-  $_SESSION['usuario'] = 'amanda';
-  $_SESSION['tipo'] = 1;
-  $_SESSION['senha'] = '123456';
-  $tipo = $_SESSION["tipo"];
+  }
 ?>
 
 <!DOCTYPE html>
