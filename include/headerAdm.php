@@ -7,7 +7,7 @@
       die();
   }else{
     session_start();
-    include("testaAdmin.php");
+    //include("testaAdmin.php");
     $tipo = $_SESSION["tipo"];
   }
 ?>
