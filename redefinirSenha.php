@@ -34,7 +34,7 @@
 
   <title>Associação dos Aposentados e Pensionistas de Ouro Branco</title>
 
-  <script src="vendor/components/jquery/jquery.min.js" type="text/javascript"></script>
+  <script src="vendor-admin-website/components/jquery/jquery.min.js" type="text/javascript"></script>
 
   <!-- Custom fonts for this template-->
   <link href="vendor-admin-website/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -72,11 +72,11 @@
   </div>
   <script src="js/validator.min.js"></script>
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor-admin-website/jquery/jquery.min.js"></script>
+  <script src="vendor-admin-website/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor-admin-website/jquery-easing/jquery.easing.min.js"></script>
 
 </body>
 
