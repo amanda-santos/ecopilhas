@@ -1,35 +1,18 @@
-<?php 
-  /*include ("conexao.php");
-  //Caso o usuário não esteja autenticado, limpa os dados e redireciona
-  if (!isset($_SESSION['login']) and ! isset($_SESSION['senha'])) {
-      //Redireciona para a página de autenticação
-      echo"<script language='javascript' type='text/javascript'>alert('Para acessar esta página é preciso fazer login.');window.location.href='index.php';</script>";
-      die();
-  }else{
-    session_start();
-    //include("testaAdmin.php");
-    $tipo = $_SESSION["tipo"];
-  }*/
-?>
-<?php 
+<?php  
   include ("conexao.php"); 
   session_start();
-  //include("testaAdmin.php");
-  $tipo = $_SESSION["tipo"];
-
   //Caso o usuário não esteja autenticado, limpa os dados e redireciona
-  if (!isset($_SESSION['login']) and ! isset($_SESSION['senha'])) {
-      //Destrói
-      session_destroy();
-
+  if ((!isset($_SESSION['login'])) && (!isset($_SESSION['senha']))) {
       //Limpa
       unset($_SESSION['login']);
       unset($_SESSION['senha']);
       unset($_SESSION['tipo']);
-
+      session_destroy();
       //Redireciona para a página de autenticação
-      echo"<script language='javascript' type='text/javascript'>alert('Para acessar esta página é preciso fazer login.');window.location.href='index.php';</script>";
-      die();
+      //echo "<script language='javascript' type='text/javascript'>alert('Para acessar esta página é preciso fazer login.');window.location.href='index.php';</script>";
+  }else{
+    $tipo = $_SESSION["tipo"];
+    //include("testaAdmin.php");
   }
 ?>
 
@@ -45,6 +28,8 @@
   <meta name="author" content="">
 
   <title>EcoPilhas</title>
+
+  <script src="vendor-admin-website/jquery/jquery.min.js"></script>
   
   <!-- Custom fonts for this template-->
   <link href="vendor-admin-website/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -95,15 +80,15 @@
     <ul class="sidebar navbar-nav">
       <?php
         // configurações
-        // para acessar, o tipo de perfil deve ser igual a 1 (coordenador)
+        // para acessar, o tipo de perfil deve ser igual a 1 (professor)
         if (($tipo == 1)) {
       ?> 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="mensalidade" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="configuracoes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cog"></i>
               <span>Configurações</span>
             </a>
-            <div class="dropdown-menu" aria-labelledby="mensalidade">
+            <div class="dropdown-menu" aria-labelledby="configuracoes">
               <a class="dropdown-item" href="cadastrarUsuario.php">Cadastrar Perfil <br>Administrativo</a>
               <a class="dropdown-item" href="exibirUsuarios.php">Exibir Perfis <br>Administrativos</a>
             </div>
