@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+  
   <script src="bootstrap-validator-master\dist\validator.js"></script>
   <script src="js\buscaSocio.js"></script>
   <script src="js\mascara.js"></script>
