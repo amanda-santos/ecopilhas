@@ -20,6 +20,7 @@ session_start();
   <link href="vendor-main-website/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
+  <link href="css/sb-admin.css" rel="stylesheet">
   <link href="css/main-website.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -97,11 +98,32 @@ session_start();
           <a class="nav-link" href="#" id="navLink">Atividades</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" id="navLink">Solicite um Coletor ou uma Palestra</a>
+          <a class="nav-link" href="#" id="navLink">Solicite um Coletor ou uma Palestra</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#map" id="navLink">Mapa de Coletores de Pilhas</a>
         </li>
+        <!-- fim área admin/login -->
+        <?php
+          if (isset($_SESSION['login'])){
+        ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navLink" id="login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Área Administrativa</a>
+            <div class="dropdown-menu" aria-labelledby="login">
+              <a target="_blank" class="dropdown-item" href="indexAdmin.php">Acesse seu perfil</a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
+            </div>
+          </li>
+        <?php
+          }else{
+        ?>
+          <li class="nav-item">
+            <a target="_blank" class="nav-link" href="login.html" id="navLink">Faça seu Login</a>
+          </li>
+        <?php
+          }
+        ?>
+        <!-- fim área admin/login -->
       </ul>
     </div>
 
