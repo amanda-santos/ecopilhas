@@ -167,7 +167,7 @@ a {
 }
 
 a:hover {
-  color: #0056b3;
+  color: rgb(75, 128, 54);
   text-decoration: underline;
 }
 
@@ -2642,7 +2642,6 @@ a.btn-secondary, .btn-secondary {
   background: #d82a2a;
   border: 1px solid #d82a2a;
   color: #fff;
-  text-transform: uppercase;
 }
 
 a.btn-secondary:hover, .btn-secondary:hover {
@@ -4356,7 +4355,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #007bff;
+  background-color: rgb(75, 128, 54);
 }
 
 .nav-fill .nav-item {
