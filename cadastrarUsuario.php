@@ -72,7 +72,7 @@ include("include/headerAdm.php");
               <label for="nomeSite">
                 Nome a ser exibido em postagens <span title="obrigatório">*</span>
               </label>
-              <input type="text" class="form-control" id="nomeSite" placeholder="Nome a ser exibido em postagens" name="nomeSite" required value="Associação dos Aposentados e Pensionistas de Ouro Branco">
+              <input type="text" class="form-control" id="nomeSite" placeholder="Nome a ser exibido em postagens" name="nomeSite" required value="EcoPilhas">
             </div>
 
             <div class="form-group col-md-6">
