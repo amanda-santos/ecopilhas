@@ -23,10 +23,9 @@ if (isset($_SESSION['login'])){
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Sobrenome</th>
             <th>Nome de Usuário</th>
             <th>E-mail</th>
-            <th>Nome do Site</th>
+            <th>Nome a ser exibido em postagens</th>
             <th>Tipo de Usuário</th>
             <th>Situação</th>
             <th>Ações</th>
@@ -35,10 +34,9 @@ if (isset($_SESSION['login'])){
         <tfoot>
           <tr>
             <th>Nome</th>
-            <th>Sobrenome</th>
             <th>Nome de Usuário</th>
             <th>E-mail</th>
-            <th>Nome do Site</th>
+            <th>Nome a ser exibido em postagens</th>
             <th>Tipo de Usuário</th>
             <th>Situação</th>
             <th>Ações</th>
@@ -47,17 +45,16 @@ if (isset($_SESSION['login'])){
         <tbody>
 
           <?php
-            $sqlPerfil = "SELECT P.idUsuario, P.nome, P.sobrenome, P.usuario, P.email, P.nomeSite, TP.tipo, P.ativo
-                        FROM ecopilhas.Usuario AS P, ecopilhas.TipoUsuario AS TP
-                        WHERE P.idUsuario = TP.idTipoUsuario;";
+            $sqlPerfil = "SELECT U.idUsuario, U.nome, U.sobrenome, U.usuario, U.email, U.nomeSite, TU.tipo, U.ativo
+                            FROM ecopilhas.Usuario AS U, ecopilhas.TipoUsuario AS TU
+                            WHERE U.TipoUsuario_idTipoUsuario = TU.idTipoUsuario;";
 
             $resultPerfil = $con->query($sqlPerfil);
 
             if ($resultPerfil->num_rows > 0) {
               while ($row = $resultPerfil->fetch_assoc()) {
                 $id = $row["idUsuario"];
-                $nome = ucwords($row["nome"]);
-                $sobrenome = ($row["sobrenome"]);
+                $nome = ucwords($row["nome"]) . " " . ucwords($row["sobrenome"]);
                 $usuario = $row["usuario"];
                 $email = $row["email"];
                 $nomeSite = $row["nomeSite"];
@@ -75,13 +72,12 @@ if (isset($_SESSION['login'])){
                 }
           ?>
                   <td><?php echo $nome; ?></td>
-                  <td><?php echo $sobrenome; ?></td>
                   <td><?php echo $usuario; ?></td>
                   <td><?php echo $email; ?></td>
                   <td><?php echo $nomeSite; ?></td>
                   <td><?php echo $tipo; ?></td>
                   <td><?php echo $situacao; ?></td>
-                  <td><a title='Editar Perfil' href='editarUsuarioAdmin.php?id=<?php echo $id; ?>'><i class="fas fa-edit" style="color:#0069d9"></i></a></td>
+                  <td><a title='Editar Perfil' href='editarUsuarioAdmin.php?id=<?php echo $id; ?>'><i class="fas fa-edit"></i></a></td>
                 </tr>
           <?php
             }
