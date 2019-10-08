@@ -3,7 +3,7 @@ include("include/headerAdm.php");
 
 $id = $_GET["id"];
 
-$sql = "SELECT * FROM Usuario 
+$sql = "SELECT * FROM ecopilhas.Usuario 
         WHERE idUsuario = " . $id . ";";
 
 $result = $con->query($sql) or die($con->error);
