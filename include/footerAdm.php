@@ -3,54 +3,6 @@
       </div>
       <!-- /.container-fluid -->
 
-      <!--início do modal para edição do footer
-      <div class="modal fade bd-example-modal-sm" id="editarFooter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-
-        <?php
-            /*
-            $sqlFooter = "SELECT conteudo FROM itemsite WHERE idItemSite = 3;";
-            $resultFooter = $con->query($sqlFooter);
-            if ($resultFooter->num_rows > 0){
-              while ($exibirFooter = $resultFooter->fetch_assoc()){
-                $footer = $exibirFooter["conteudo"];
-              } //fim while
-            } //fim if
-            */
-          ?>
-
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Editar</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-
-              <form class="form-horizontal" action="atualizarFooter.php" method="post" data-toggle="validator">
-
-                <div class="form-group">
-                  <label class="control-label col-sm-12" for="conteudoFooter">Texto:</label>
-                  <div class="col-sm-12">
-                    <textarea class="form-control" id="conteudoFooter" name="conteudoFooter" placeholder="Insira o texto"><?php echo $footer;?></textarea> 
-                  </div>
-                </div>
-               
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <input type="submit" class="btn btn-primary" value="Atualizar" name = "atualizar"></input>
-          </div>
-
-          </form>
-
-        </div>
-        </div>
-      </div>
-      fim do modal para edição do footer-->
-
       <!-- footer -->
       <footer class="sticky-footer">
         <div class="container my-auto">
@@ -73,11 +25,11 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Deseja realmente sair?</h5>
+          <h5 class="modal-title" id="logoutModal">Deseja realmente sair?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -125,16 +77,16 @@
   <script src="js/validator.min.js"></script>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor-admin-website/jquery/jquery.min.js"></script>
+  <script src="vendor-admin-website/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor-admin-website/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="vendor/chart.js/Chart.min.js"></script>
-  <script src="vendor/datatables/jquery.dataTables.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="vendor-admin-website/chart.js/Chart.min.js"></script>
+  <script src="vendor-admin-website/datatables/jquery.dataTables.js"></script>
+  <script src="vendor-admin-website/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.min.js"></script>
