@@ -7,7 +7,7 @@ session_start();
 if (isset($_POST["atualizar"])) {
     //recebe os valores enviados pelo formulário
     $idUsuario = $_GET['idUsuario'];
-    $sqlVerifica = "SELECT senha FROM Usuario WHERE idUsuario = " . $idUsuario . ";";
+    $sqlVerifica = "SELECT senha FROM ecopilhas.Usuario WHERE idUsuario = " . $idUsuario . ";";
     $resultVerifica = $con->query($sqlVerifica);
 
     if ($resultVerifica->num_rows > 0) {

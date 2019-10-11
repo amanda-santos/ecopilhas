@@ -3,7 +3,7 @@
     include 'include/headerAdm.php';
     $idUsuario = $_GET['idUsuario'];
 
-    $sql = 'UPDATE Usuario SET ativo = 0 WHERE idUsuario = ' . $idUsuario . ';';
+    $sql = 'UPDATE ecopilhas.Usuario SET ativo = 0 WHERE idUsuario = ' . $idUsuario . ';';
 
     if ($con->query($sql) == true) {
         echo "<script language='javascript' type='text/javascript'>alert('Usuário inativado com sucesso!');</script>";

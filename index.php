@@ -7,67 +7,68 @@ include("include/header.php"); // incluir arquivo com header do site
 
   <h2 class="my-4">EcoPilhas</h2>
 
-  <!-- Marketing Icons Section -->
-  <div class="row">
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h4 class="card-header">Projeto</h4>
-        <div class="card-body">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-        </div>
-        <div class="card-footer">
-          <a href="historia.php" class="btn btn-primary">Saiba Mais</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h4 class="card-header">Equipe</h4>
-        <div class="card-body">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-        </div>
-        <div class="card-footer">
-          <a href="estatuto.php" class="btn btn-primary">Saiba Mais</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h4 class="card-header">Resoluções</h4>
-        <div class="card-body">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-        </div>
-        <div class="card-footer">
-          <a href="diretoria.php" class="btn btn-primary">Saiba Mais</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h4 class="card-header">Logística Reversa</h4>
-        <div class="card-body">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-        </div>
-        <div class="card-footer">
-          <a href="diretoria.php" class="btn btn-primary">Saiba Mais</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h4 class="card-header">EcoPilhas em Números</h4>
-        <div class="card-body">
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-        </div>
-        <div class="card-footer">
-          <a href="diretoria.php" class="btn btn-primary">Saiba Mais</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /.row -->
+  <!-- seções de páginas -->
 
-  <hr>
+  <?php
+
+    $sqlSecaoPaginasIndex = "SELECT idSecaoPaginas, titulo 
+                              FROM SecaoPaginas 
+                              WHERE exibir = 1";
+
+    $resultSecaoPaginasIndex = $con->query($sqlSecaoPaginasIndex);
+
+    if ($resultSecaoPaginasIndex->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+      while ($exibirSecaoPaginasIndex = $resultSecaoPaginasIndex->fetch_assoc()){
+        $idSecaoPaginasIndex = $exibirSecaoPaginasIndex["idSecaoPaginas"];
+        $nomeSecaoPaginasIndex = ucwords($exibirSecaoPaginasIndex["titulo"]);
+    ?>
+        <h3><?php echo $nomeSecaoPaginasIndex; ?></h3><br>
+      
+        <div class="row">
+          
+          <?php
+
+            $sqlPaginaIndex = "SELECT idPagina, nome, conteudo 
+                                FROM Pagina 
+                                WHERE exibir = 1 
+                                AND SecaoPaginas_idSecaoPaginas = " . $idSecaoPaginasIndex;
+
+            $resultPaginaIndex = $con->query($sqlPaginaIndex);
+
+            if ($resultPaginaIndex->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+              while ($exibirPaginaIndex = $resultPaginaIndex->fetch_assoc()){
+                $idPaginaIndex = $exibirPaginaIndex["idPagina"];
+                $nomePaginaIndex = ucwords($exibirPaginaIndex["nome"]);
+                $conteudoPaginaIndex = $exibirPaginaIndex["conteudo"];
+          ?>
+
+                <div class="col-lg-4 mb-4">
+                  <div class="card h-100">
+                    <h4 class="card-header"><?php echo $nomePaginaIndex; ?></h4>
+                    <div class="card-body">
+                      <p style="padding-top: -50px;" class="card-text"><?php echo limitarTexto($conteudoPaginaIndex, $limite=200);?></p>
+                    </div>
+                    <div class="card-footer">
+                      <a href="pagina.php?id=<?php echo $idPaginaIndex; ?>" class="btn btn-primary">Saiba Mais</a>
+                    </div>
+                  </div>
+                </div>
+
+          <?php
+              } // fim while pagina
+            } // fim if pagina
+          ?>
+          
+        </div>
+        <!-- /.row -->
+        <hr>
+
+    <?php
+      } // fim while SecaoPaginas
+    } // fim if SecaoPaginas
+    ?>
+
+    <!-- fim seções de páginas -->
 
   <!-- Portfolio Section -->
   <div class="row">

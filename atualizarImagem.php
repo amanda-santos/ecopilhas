@@ -2,16 +2,13 @@
 include("include/header.php");
 
 if (isset($_SESSION["login"])) { //SE EXISTIR AUTENTICAÇÃO
+
 	if (!isset($_GET['id'])) { //se não tiver nenhum id passado pela url deve-se redirecionar o usuário para a página inicial
-
-	echo "<script>window.location = 'index.php';</script>";
-	exit;
-
+		echo "<script>window.location = 'index.php';</script>";
+		exit;
 	} else {
-
 	//SE ATUALIZAR POST
 	if (isset($_POST["atualizar"])) {
-
 		$id = $_GET["id"];
 		$titulo = addslashes($_POST["titulo"]);
 		$legenda = addslashes($_POST["legenda"]);
@@ -96,7 +93,7 @@ if (isset($_SESSION["login"])) { //SE EXISTIR AUTENTICAÇÃO
 
 		} //fim empty
 
-		$sql = 'UPDATE imagem SET imagem = "' . $imagem . '", titulo = "' . $titulo . '", legenda = "' . $legenda . '", header = ' . $header . ', link = "' . $link . '" WHERE idImagem = ' . $id . ';';
+		$sql = 'UPDATE Imagem SET imagem = "' . $imagem . '", titulo = "' . $titulo . '", legenda = "' . $legenda . '", header = ' . $header . ', link = "' . $link . '" WHERE idImagem = ' . $id . ';';
 				
 		if ($con->query($sql) === TRUE) {
 			echo "<script>alert('Atualização realizada com sucesso!');</script>";
@@ -109,7 +106,8 @@ if (isset($_SESSION["login"])) { //SE EXISTIR AUTENTICAÇÃO
 	} //fim se atualizar post
 
 	include("include/footer.php");
-}
+	}
+
 } else {
   echo "<script>window.location = 'index.php';</script>";
 }

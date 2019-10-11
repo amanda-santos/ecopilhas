@@ -1,7 +1,11 @@
 <?php
 include("conexao.php"); //incluir arquivo com conexão ao banco de dados
-//include("../testaAdmin.php");
+include("testaAdmin.php");
+include("include/limitaTexto.php");
 session_start();
+if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
+  $tipo = $_SESSION['tipo'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -84,16 +88,93 @@ session_start();
 
     <div class="collapse navbar-collapse" id="navbarsExample09">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="" id="navLink" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sobre</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown09">
-            <a class="dropdown-item" href="#">O Projeto</a>
-            <a class="dropdown-item" href="#">Equipe</a>
-            <a class="dropdown-item" href="#">Resoluções</a>
-            <a class="dropdown-item" href="#">Logística Reversa</a>
-            <a class="dropdown-item" href="#">EcoPilhas em Números</a>
-          </div>
-        </li>
+
+        <!-- seções de páginas -->
+        <?php
+        $sqlSecaoPaginas = "SELECT idSecaoPaginas, titulo 
+                              FROM SecaoPaginas 
+                              WHERE exibir = 1";
+
+        $resultSecaoPaginas = $con->query($sqlSecaoPaginas);
+
+        if ($resultSecaoPaginas->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+          while ($exibirSecaoPaginas = $resultSecaoPaginas->fetch_assoc()){
+            $idSecaoPaginas = $exibirSecaoPaginas["idSecaoPaginas"];
+            $nomeSecaoPaginas = $exibirSecaoPaginas["titulo"];
+        ?>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navLink" id="dropdownSecao<?php echo $idSecaoPaginas; ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $nomeSecaoPaginas; ?>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownSecao<?php echo $idSecaoPaginas; ?>">
+
+                <?php
+
+                  $sqlPagina = "SELECT idPagina, nome 
+                                  FROM Pagina 
+                                  WHERE exibir = 1 
+                                  AND SecaoPaginas_idSecaoPaginas = " . $idSecaoPaginas;
+
+                  $resultPagina = $con->query($sqlPagina);
+
+                  if ($resultPagina->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+                    while ($exibirPagina = $resultPagina->fetch_assoc()){
+                      $idPagina = $exibirPagina["idPagina"];
+                      $nomePagina = ucwords($exibirPagina["nome"]);
+                ?>
+
+                      <a class="dropdown-item" href="pagina.php?id=<?php echo $idPagina; ?>"><?php echo $nomePagina; ?>
+
+                      <?php
+
+                        if (isset($_SESSION["login"])) { //SE EXISTIR AUTENTICAÇÃO
+                          if (isAdmin($_SESSION['tipo'])){ //SE O USUÁRIO LOGADO FOR DO TIPO ADMINISTRADOR
+
+                            $sqlPaginaAprov = "SELECT aprovacao FROM PaginaPendente WHERE aprovacao = 0 AND idPaginaPendente = " . $idPagina;
+
+                            $resultPaginaAprov = $con->query($sqlPaginaAprov);
+
+                            if ($resultPaginaAprov->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+                      ?>
+                              <span class="badge badge-danger">1</span>
+                      <?php
+                            }else{
+
+                              if ($idPagina == 2) { // equipe
+
+                                $sqlAprovacaoEquip = "SELECT aprovacao 
+                                                        FROM MembroEquipePendente 
+                                                        WHERE aprovacao = 0";
+                                $resultAprovacaoEquip = $con->query($sqlAprovacaoEquip);
+
+                                if ($resultAprovacaoEquip->num_rows > 0) {
+                      ?>
+                                  <span class="badge badge-danger">1</span>
+                      <?php
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ?>
+                      
+                      </a>
+
+                <?php
+                    } // fim while Pagina
+                  } // fim if Pagina
+                ?>
+
+              </div>
+
+            </li>
+        <?php
+          } // fim while SecaoPaginas
+        } // fim if SecaoPaginas
+        ?>
+
+        <!-- fim seções de páginas -->
         <li class="nav-item">
           <a class="nav-link" href="#" id="navLink">Atividades</a>
         </li>
@@ -103,7 +184,36 @@ session_start();
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#map" id="navLink">Mapa de Coletores de Pilhas</a>
         </li>
-        <!-- fim área admin/login -->
+
+        <li class="nav-item">
+          <a class="nav-link" href="galeria.php" id="navLink">Galeria</a>
+        </li>
+
+        <!-- configurações -->
+
+        <?php
+          if (isset($_SESSION["login"])) { //SE EXISTIR AUTENTICAÇÃO
+            if (isAdmin($tipo)){ //SE O USUÁRIO LOGADO FOR DO TIPO ADMINISTRADOR 
+        ?>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navLink" id="dropdownConfiguracoes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Configurações</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownConfiguracoes">
+                    
+                    <a class="dropdown-item" data-toggle="modal" data-target="#secao" href="">Seções</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#secaoPaginas" href="">Seções de Páginas</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#secaoPosts" href="">Seções de Postagens</a>
+
+                </div>
+              </li>
+
+        <?php
+            }
+          }
+        ?>
+        <!-- fim configurações -->
+
+        <!-- início área admin/login -->
         <?php
           if (isset($_SESSION['login'])){
         ?>
@@ -124,53 +234,201 @@ session_start();
           }
         ?>
         <!-- fim área admin/login -->
+
       </ul>
     </div>
 
   </nav>
 
-  <!--Carousel Wrapper-->
-  <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+<!--MODAIS-->
 
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-      <div class="carousel-item">
+<!-- Modal - Seções de Páginas -->
+<div class="modal fade bd-example-modal-sm" id="secaoPaginas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Seções de Páginas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+        <?php
+
+        $sqlSecaoPaginas = "SELECT idSecaoPaginas, titulo FROM SecaoPaginas";
+
+        $resultSecaoPaginas = $con->query($sqlSecaoPaginas);
+
+        if ($resultSecaoPaginas->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+          while ($exibirSecaoPaginas = $resultSecaoPaginas->fetch_assoc()){
+            $idSecaoPaginas = $exibirSecaoPaginas["idSecaoPaginas"];
+            $nomeSecaoPaginas = ucwords($exibirSecaoPaginas["titulo"]);
+
+        ?>
+            <label class="control-label col-sm-12" for="nomeSecaoPaginas">
+              <?php echo $nomeSecaoPaginas; ?>
+              <a href="editarSecaoPaginas.php?id=<?php echo $idSecaoPaginas; ?>">
+                <i class="far fa-edit"></i>
+              </a>
+            </label>
+        <?php
+            } // fim while SecaoPaginas
+          } // fim if SecaoPaginas
+        ?>
+
+        <div class="col-md-12"> 
+          <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#cadastrarSecaoPaginas">
+            <i class="fas fa-plus"></i>  
+            Cadastrar Nova Seção de Páginas
+          </button>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal - Cadastrar Seção de Páginas-->
+<div class="modal fade" id="cadastrarSecaoPaginas" tabindex="-1" role="dialog" aria-labelledby="cadastrarSecaoPaginas" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="secaoPaginasLabel">Cadastrar Nova Seção de Páginas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+      <form class="form-horizontal" action="inserirSecaoPaginas.php" method="post" data-toggle="validator">
+
+          <div class="form-group">
+            <label class="control-label col-sm-12" for="titulo">Título:</label>
+            <div class="col-sm-12">
+              <input required type="text" class="form-control" id="titulo" name="titulo">
+            </div>
+          </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <input type="submit" class="btn btn-primary" value="Cadastrar" name="cadastrar"></input>
+      </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!--Carousel Wrapper-->
+<div style="height: 350px;" id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+
+<!--Slides-->
+<div class="carousel-inner" role="listbox">
+
+  <?php
+
+  $cont = 0;
+
+  $sqlHeader = "SELECT idImagem, imagem, titulo, legenda, link 
+                FROM Imagem 
+                WHERE header = 1";
+
+  $resultHeader = $con->query($sqlHeader);
+
+  if ($resultHeader->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+    while ($exibirHeader = $resultHeader->fetch_assoc()){
+      $idImagem = $exibirHeader["idImagem"];
+      $imagem = $exibirHeader["imagem"];
+      $titulo = $exibirHeader["titulo"];
+      $legenda = $exibirHeader["legenda"];
+      $link = $exibirHeader["link"];
+      $cont++;
+
+      if ($cont == 1) {
+  ?>
+        <div class="carousel-item active">
+
+  <?php
+      }else{
+  ?>
         <div class="carousel-item">
-          <div class="view" style="background-position: center; background-image: url('imagens/mascote-ecopilhas.jpg'); background-repeat: no-repeat; background-size: cover;">
+  <?php
+      }
+  ?>
+          <div class="view" style="background-position: center; background-image: url('upload/img-galeria/<?php echo $imagem; ?>'); background-repeat: no-repeat; background-size: cover;">
 
-          <div class="mask d-flex justify-content-center align-items-end">
-            <div class="col-12 text-center white-text mx-5 wow fadeIn" style="background-color: rgba(0, 0, 0, 0.7)">
+            <!-- Mask & flexbox options-->
+            <?php 
+            if (($titulo != null) || ($legenda != null) || ($link != null)){
+            ?>
+              <div class="mask d-flex justify-content-center align-items-end">
+                <div class="col-12 text-center white-text mx-5 wow fadeIn" style="background-color: rgba(0, 0, 0, 0.7)">
+            <?php
+            }else{
+            ?>
+              <div class="d-flex justify-content-center align-items-center">
+                <div class="col-12 text-center white-text mx-5 wow fadeIn">
+            <?php
+            }
+            ?>
+              <!-- Content -->
                 <h1 style="color:white;" class="mb-4">
-                  <strong>Titulo</strong>
+                  <strong><?php echo $titulo; ?></strong>
                 </h1>
                 <p style="padding-top: 0px; color:white; font-size: 25px;">
-                  Legenda
+                  <?php echo $legenda; ?>
                 </p>
-                <a target="_blank" href="" style="color:white;" class="btn btn-outline-white btn-lg">
-                  <strong>
-                    Saiba Mais
-                  </strong>
-                </a>
+                <?php
+                  if ($link != null) {
+                ?>
+                  <a target="_blank" href="<?php echo $link; ?>" style="color:white;" class="btn btn-outline-white btn-lg">
+                    <strong>
+                      Saiba Mais
+                    </strong>
+                  </a>
+                <?php
+                  }
+                ?>
               </div>
               <!-- Content -->
+
             </div>
             <!-- Mask & flexbox options-->
+
           </div>
         </div>
         <!--/First slide-->
-      </div>
-      <!--/.Slides-->
+  <?php
+    }
+  }
+  ?>
 
-      <!--Controls-->
-      <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Próximo</span>
-      </a>
-      <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-      <!--/.Controls-->
+</div>
+<!--/.Slides-->
 
-    </div>
-    <!--/.Carousel Wrapper-->
+<!--Controls-->
+<a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="sr-only">Próximo</span>
+</a>
+<a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Anterior</span>
+</a>
+<!--/.Controls-->
+
+</div>
+<!--/.Carousel Wrapper-->

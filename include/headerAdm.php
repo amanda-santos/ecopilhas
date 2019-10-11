@@ -9,10 +9,10 @@
       unset($_SESSION['tipo']);
       session_destroy();
       //Redireciona para a página de autenticação
-      //echo "<script language='javascript' type='text/javascript'>alert('Para acessar esta página é preciso fazer login.');window.location.href='index.php';</script>";
+      echo "<script language='javascript' type='text/javascript'>alert('Para acessar esta página é preciso fazer login.');window.location.href='index.php';</script>";
   }else{
     $tipo = $_SESSION["tipo"];
-    //include("testaAdmin.php");
+    include("testaAdmin.php");
   }
 ?>
 
@@ -81,7 +81,7 @@
       <?php
         // configurações
         // para acessar, o tipo de perfil deve ser igual a 1 (professor)
-        if (($tipo == 1)) {
+        if (isAdmin($tipo)) {
       ?> 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="configuracoes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

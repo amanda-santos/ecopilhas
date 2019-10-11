@@ -1,5 +1,5 @@
 <?php
-include("include/header.php");
+  include("include/header.php");
 
   if (isset($_SESSION["login"])) { //SE EXISTIR AUTENTICAÇÃO
     if (isAdmin($_SESSION['tipo'])){ //SE O USUÁRIO LOGADO FOR DO TIPO ADMINISTRADOR

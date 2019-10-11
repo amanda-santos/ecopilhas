@@ -1,10 +1,10 @@
 <?php
 include("include/headerAdm.php");
 
-$id = $_GET["id"];
+$idUsuario = $_GET["id"];
 
-$sql = "SELECT * FROM Usuario 
-        WHERE idUsuario = " . $id . ";";
+$sql = "SELECT * FROM ecopilhas.Usuario 
+        WHERE idUsuario = " . $idUsuario . ";";
 
 $result = $con->query($sql) or die($con->error);
 
@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
   <li class="breadcrumb-item active">Editar Perfil Administrativo</li>
 </ol>
 
-<form enctype="multipart/form-data" role="form" data-toggle="validator" action="atualizarUsuario.php?idUsuario=<?php echo $id; ?>" method="post">
+<form enctype="multipart/form-data" role="form" data-toggle="validator" action="atualizarUsuario.php?idUsuario=<?php echo $idUsuario; ?>" method="post">
 
     <div class="card mb-3">
       <a href="#dados" style="text-decoration: none" class="d-block card-header" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="dados">
@@ -94,6 +94,10 @@ if ($result->num_rows > 0) {
               <input value="<?php echo $nomeSite; ?>" type="text" class="form-control" id="nomeSite" placeholder="Nome a ser exibido em postagens" name="nomeSite" required value="Associação dos Aposentados e Pensionistas de Ouro Branco">
             </div>
 
+            <?php
+              if ($tipoUsuario == 1) {
+            ?>
+
             <div class="form-group col-md-6">
               <label for="tipo">
                 Nível de Acesso
@@ -117,6 +121,14 @@ if ($result->num_rows > 0) {
               </select>
             </div>
 
+            <?php
+              }else{
+            ?>
+                <input hidden name="tipo" value="<?php echo $tipoUsuario; ?>">
+            <?php
+              }
+            ?>
+
           </div>
         </div>
       </div>
@@ -129,12 +141,12 @@ if ($result->num_rows > 0) {
       </div>
 
       <div class="col-lg-4 col-sm-8 col-md-8 float-right">
-        <a class = "btn btn-primary" href = "editarSenha.php?idUsuario=<?php echo $id; ?>"><i class="fas fa-lock"></i> Editar Senha</a>
+        <a class = "btn btn-primary" href = "editarSenha.php?idUsuario=<?php echo $idUsuario; ?>"><i class="fas fa-lock"></i> Editar Senha</a>
         
         <?php 
         if ($ativo == 1){
         ?>
-          <a class="btn btn-danger" href="#" onclick="inativar('<?php echo $id; ?>');"><i class="fas fa-user-slash"></i> Inativar Perfil</a>
+          <a class="btn btn-danger" href="#" onclick="inativar('<?php echo $idUsuario; ?>');"><i class="fas fa-user-slash"></i> Inativar Perfil</a>
         <?php
         }
         ?>
@@ -147,7 +159,7 @@ if ($result->num_rows > 0) {
 <script type="text/javascript">
     function inativar(id) {
         if (window.confirm('Deseja realmente inativar o seu perfil? Esta ação não poderá ser desfeita.')) {
-            window.location = 'inativarUsuario.php?idUsuario=' + id;
+            window.location = 'inativarUsuario.php?idUsuario=' + <?php echo $idUsuario?>;
         }
     }
 </script>
