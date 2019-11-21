@@ -70,6 +70,82 @@ include("include/header.php"); // incluir arquivo com header do site
 
     <!-- fim seções de páginas -->
 
+          <!-- seções de postagens -->
+
+      <?php
+        
+        $sqlSecaoPosts = "SELECT idSecaoPosts,titulo FROM ecopilhas.SecaoPosts WHERE exibir = 1;";
+
+        $resultSecaoPosts = $con->query($sqlSecaoPosts);
+
+        if ($resultSecaoPosts->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+          while ($exibirSecaoPosts = $resultSecaoPosts->fetch_assoc()){
+            $idSecao = $exibirSecaoPosts["idSecaoPosts"];
+            $tituloSecao = $exibirSecaoPosts["titulo"];
+      ?>
+            <hr>
+
+            <div class="row">
+              <div class="col-lg-8 col-sm-6 ">
+                <h2><?php echo $tituloSecao;?></h2>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <a class="float-right" href="postagens.php?id=<?php echo $idSecao;?>">Ver todas as postagens</a>
+              </div>
+            </div>
+
+            <div class="row">
+
+            <?php
+
+              $sqlPosts = "SELECT idPost, titulo, conteudo, img FROM ecopilhas.Post WHERE cadastro = 1 AND idSecaoPosts = " . $idSecao . " ORDER BY dataAprovacao DESC LIMIT 3;";
+
+              $resultPosts = $con->query($sqlPosts);
+
+              if ($resultPosts->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+                while ($exibirPosts = $resultPosts->fetch_assoc()){
+                  $idPost = $exibirPosts["idPost"];
+                  $titulo = $exibirPosts["titulo"];
+                  $conteudo = $exibirPosts["conteudo"];
+                  $img = $exibirPosts["img"];
+            ?>
+                  <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                      <a href="post.php?id=<?php echo $idPost; ?>">
+                        <img class="card-img-top crop-image-post-index" src="upload/img-post/<?php echo $img; ?>" alt="">
+                      </a>
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <a href="post.php?id=<?php echo $idPost; ?>"><?php echo $titulo; ?></a>
+                        </h4>
+                        <p class="card-text"><?php echo limitarTexto($conteudo, $limite=270); ?></p>
+                      </div>
+                      <div class="card-footer">
+                        <a href="post.php?id=<?php echo $idPost; ?>" class="btn btn-primary">Saiba Mais</a>
+                      </div>
+                    </div>
+                  </div>
+
+            <?php
+
+                } // fim while
+              } // fim if
+
+            ?>
+                  
+        </div>
+        <!-- /.row -->
+
+      <?php
+
+          } // fim while
+        } // fim if
+
+      ?>
+
+      <!-- fim seções de postagens -->
+
+
   <!-- Portfolio Section -->
   <div class="row">
     <div class="col-lg-8 col-sm-6 ">
@@ -125,7 +201,7 @@ include("include/header.php"); // incluir arquivo com header do site
     </div>
 
   </div>
-  <!-- /.row -->
+  <!-- /.row-->
 
   <hr>
 

@@ -175,7 +175,52 @@ if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
         ?>
 
         <!-- fim seções de páginas -->
-        <li class="nav-item">
+
+        <!-- seções de postagens -->
+
+           <?php
+
+              $sqlPostagens = "SELECT idSecaoPosts,titulo FROM ecopilhas.SecaoPosts WHERE exibir = 1;";
+
+              $result = $con->query($sqlPostagens);
+
+              if ($result->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+                while ($secaoPosts = $result->fetch_assoc()){
+                  $idSecaoPosts = $secaoPosts["idSecaoPosts"];
+            ?>
+
+                  <li class="nav-item">
+                    <a style="font-size: 14px;" class="nav-link" href="postagens.php?id=<?php echo $idSecaoPosts;?>" id="navLink">
+                      <?php 
+
+                      echo $secaoPosts["titulo"];
+
+                      if (isset($_SESSION['login'])){
+
+                        if (isAdmin($_SESSION['tipo'])){
+
+                          $sqlPostsPendentes = "SELECT aprovacao FROM ecopilhas.PostPendente WHERE aprovacao = 0 AND idSecaoPosts = " . $idSecaoPosts;
+
+                          $resultPendentes = $con->query($sqlPostsPendentes);
+
+                          if ($resultPendentes->num_rows > 0) { // Exibindo cada linha retornada com a consulta  
+                    ?>
+                            <span class="badge badge-danger">1</span>
+                    <?php
+                          }
+                        }
+                      }
+                      ?>
+                    </a>
+                  </li>
+            <?php
+                } // fim while
+              }
+            ?>
+
+          <!-- fim seções de postagens -->
+
+          <li class="nav-item">
           <a class="nav-link" href="#" id="navLink">Atividades</a>
         </li>
         <li class="nav-item">
@@ -331,6 +376,98 @@ if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
     </div>
   </div>
 </div>
+
+
+<!-- Modal - Seções de Postagens -->
+    <div class="modal fade bd-example-modal-sm" id="secaoPosts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Seções de Postagens</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            
+            <?php
+
+            $sqlSecaoPosts = "SELECT idSecaoPosts, titulo FROM ecopilhas.SecaoPosts";
+
+            $resultSecaoPosts = $con->query($sqlSecaoPosts);
+
+            if ($resultSecaoPosts->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+              while ($exibirSecaoPosts = $resultSecaoPosts->fetch_assoc()){
+                $idSecaoPosts = $exibirSecaoPosts["idSecaoPosts"];
+                $tituloSecaoPosts = $exibirSecaoPosts["titulo"];
+
+            ?>
+                <label class="control-label col-sm-12">
+                  <?php echo $tituloSecaoPosts; ?>
+                  <a href="editarSecaoPosts.php?id=<?php echo $idSecaoPosts; ?>">
+                    <i class="far fa-edit"></i>
+                  </a>
+                </label>
+            <?php
+                } // fim while SecaoPaginas
+              } // fim if SecaoPaginas
+            ?>
+
+            <div class="col-md-12"> 
+              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#cadastrarSecaoPosts">
+                <i class="fas fa-plus"></i>  
+                Cadastrar Nova Seção de Postagens
+              </button>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+<!-- Modal - Cadastrar Seção de Postagens-->
+    <div class="modal fade" id="cadastrarSecaoPosts" tabindex="-1" role="dialog" aria-labelledby="cadastrarSecaoPosts" aria-hidden="true">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="secaoPaginasLabel">Cadastrar Nova Seção de Postagens</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+          <form class="form-horizontal" action="inserirSecaoPosts.php" method="post" data-toggle="validator">
+
+              <div class="form-group">
+                <label class="control-label col-sm-12" for="titulo">Título:</label>
+                <div class="col-sm-12">
+                  <input required type="text" class="form-control" id="titulo" name="titulo">
+                </div>
+              </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <input type="submit" class="btn btn-primary" value="Cadastrar" name="cadastrar"></input>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
 
 <!--Carousel Wrapper-->
 <div style="height: 350px;" id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
