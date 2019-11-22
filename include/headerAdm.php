@@ -97,9 +97,11 @@
 
                   if ($resultSolicitacoesPendentes->num_rows > 0) { // Exibindo cada linha retornada com a consulta
                     while ($exibirSolicitacoesPendentes = $resultSolicitacoesPendentes->fetch_assoc()){
+                      if($exibirSolicitacoesPendentes["cont"] > 0){
                 ?>
-                      <button style="padding-top:0px; padding-bottom:0px; padding-left:3px; padding-right:3px;" class="btn btn-sm btn-danger"><?php echo $exibirSolicitacoesPendentes["cont"]; ?></button>
+                        <button style="padding-top:0px; padding-bottom:0px; padding-left:3px; padding-right:3px;" class="btn btn-sm btn-danger"><?php echo $exibirSolicitacoesPendentes["cont"]; ?></button>
                 <?php
+                      }
                     }
                   }
                 ?>
