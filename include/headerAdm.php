@@ -83,6 +83,29 @@
         // para acessar, o tipo de perfil deve ser igual a 1 (professor)
         if (isAdmin($tipo)) {
       ?> 
+          <li class="nav-item">
+            <a class="nav-link" href="exibirSolicitacoes.php">
+              <i class="fas fa-exclamation-circle"></i>
+              <span>
+                Solicitações
+                <?php
+                  $sqlSolicitacoesPendentes = "SELECT COUNT(concluido) AS cont 
+                                                FROM Solicitacao 
+                                                WHERE concluido = 0";
+
+                  $resultSolicitacoesPendentes = $con->query($sqlSolicitacoesPendentes);
+
+                  if ($resultSolicitacoesPendentes->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+                    while ($exibirSolicitacoesPendentes = $resultSolicitacoesPendentes->fetch_assoc()){
+                ?>
+                      <button style="padding-top:0px; padding-bottom:0px; padding-left:3px; padding-right:3px;" class="btn btn-sm btn-danger"><?php echo $exibirSolicitacoesPendentes["cont"]; ?></button>
+                <?php
+                    }
+                  }
+                ?>
+              </span>
+            </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="configuracoes" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cog"></i>

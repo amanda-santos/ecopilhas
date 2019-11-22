@@ -73,6 +73,32 @@ if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
     new WOW().init();
   </script>
 
+  <script type="text/javascript">
+      /* Máscaras ER */
+      function mascara(o,f){
+          v_obj=o
+          v_fun=f
+          setTimeout("execmascara()",1)
+      }
+      function execmascara(){
+          v_obj.value=v_fun(v_obj.value)
+      }
+      function mtel(v){
+          v=v.replace(/D/g,"");             //Remove tudo o que não é dígito
+          v=v.replace(/^(d{2})(d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+          v=v.replace(/(d)(d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+          return v;
+      }
+      function id( el ){
+          return document.getElementById( el );
+      }
+      window.onload = function(){
+          id('telefone').onkeypress = function(){
+              mascara( this, mtel );
+          }
+      }
+  </script>
+
 </head>
 
 <body>
@@ -178,53 +204,50 @@ if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
 
         <!-- seções de postagens -->
 
-           <?php
+        <?php
 
-              $sqlPostagens = "SELECT idSecaoPosts,titulo FROM ecopilhas.SecaoPosts WHERE exibir = 1;";
+          $sqlPostagens = "SELECT idSecaoPosts,titulo FROM ecopilhas.SecaoPosts WHERE exibir = 1;";
 
-              $result = $con->query($sqlPostagens);
+          $result = $con->query($sqlPostagens);
 
-              if ($result->num_rows > 0) { // Exibindo cada linha retornada com a consulta
-                while ($secaoPosts = $result->fetch_assoc()){
-                  $idSecaoPosts = $secaoPosts["idSecaoPosts"];
-            ?>
+          if ($result->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+            while ($secaoPosts = $result->fetch_assoc()){
+              $idSecaoPosts = $secaoPosts["idSecaoPosts"];
+        ?>
 
-                  <li class="nav-item">
-                    <a style="font-size: 14px;" class="nav-link" href="postagens.php?id=<?php echo $idSecaoPosts;?>" id="navLink">
-                      <?php 
+              <li class="nav-item">
+                <a class="nav-link" href="postagens.php?id=<?php echo $idSecaoPosts;?>" id="navLink">
+                  <?php 
 
-                      echo $secaoPosts["titulo"];
+                  echo $secaoPosts["titulo"];
 
-                      if (isset($_SESSION['login'])){
+                  if (isset($_SESSION['login'])){
 
-                        if (isAdmin($_SESSION['tipo'])){
+                    if (isAdmin($_SESSION['tipo'])){
 
-                          $sqlPostsPendentes = "SELECT aprovacao FROM ecopilhas.PostPendente WHERE aprovacao = 0 AND idSecaoPosts = " . $idSecaoPosts;
+                      $sqlPostsPendentes = "SELECT aprovacao FROM ecopilhas.PostPendente WHERE aprovacao = 0 AND idSecaoPosts = " . $idSecaoPosts;
 
-                          $resultPendentes = $con->query($sqlPostsPendentes);
+                      $resultPendentes = $con->query($sqlPostsPendentes);
 
-                          if ($resultPendentes->num_rows > 0) { // Exibindo cada linha retornada com a consulta  
-                    ?>
-                            <span class="badge badge-danger">1</span>
-                    <?php
-                          }
-                        }
+                      if ($resultPendentes->num_rows > 0) { // Exibindo cada linha retornada com a consulta  
+                ?>
+                        <span class="badge badge-danger">1</span>
+                <?php
                       }
-                      ?>
-                    </a>
-                  </li>
-            <?php
-                } // fim while
-              }
-            ?>
+                    }
+                  }
+                  ?>
+                </a>
+              </li>
+        <?php
+            } // fim while
+          }
+        ?>
 
-          <!-- fim seções de postagens -->
+        <!-- fim seções de postagens -->
 
-          <li class="nav-item">
-          <a class="nav-link" href="#" id="navLink">Atividades</a>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" id="navLink">Solicite um Coletor ou uma Palestra</a>
+          <a class="nav-link" href="cadastrarSolicitacao.php" id="navLink">Solicite um Coletor ou uma Palestra</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#map" id="navLink">Mapa de Coletores de Pilhas</a>
