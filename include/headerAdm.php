@@ -78,6 +78,27 @@
 
     <!-- barra lateral -->
     <ul class="sidebar navbar-nav">
+      <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="marcas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-battery-full"></i>
+              <span>Pilhas</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="marcas">
+              <a class="dropdown-item" href="cadastrarMarca.php">Cadastrar Marca</a>
+              <a class="dropdown-item" href="exibirMarca.php">Exibir Marcas</a>
+              <a class="dropdown-item" href="relatorioMarca.php">Relatório</a>
+            </div>
+          </li>
+      <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="triagens" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-box-open"></i>
+              <span>Triagens</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="triagens">
+              <a class="dropdown-item" href="cadastrarTriagem.php">Cadastrar Triagem</a>
+              <a class="dropdown-item" href="exibirTriagens.php">Exibir Triagens</a>
+            </div>
+          </li>
       <?php
         // configurações
         // para acessar, o tipo de perfil deve ser igual a 1 (professor)

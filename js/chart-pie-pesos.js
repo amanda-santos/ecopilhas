@@ -3,16 +3,17 @@ Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSyste
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Pie Chart Example
-var ctx = document.getElementById("vinculo");
-var ativos = document.getElementById("numSociosAtivos");
-var inativos = document.getElementById("numSociosInativos");
+var ctx = document.getElementById("pesosChart");
+var pesos2017 = document.getElementById("peso2017");
+var pesos2018 = document.getElementById("peso2018");
+var pesos2019 = document.getElementById("peso2019");
 
 var vinculo = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: ["Ativo", "Inativo"],
+    labels: ["2017", "2018", "2019"],
     datasets: [{
-      data: [ativos.value, inativos.value],
+      data: [pesos2017.value, pesos2018.value,pesos2019],
       backgroundColor: ['#007bff', '#dc3545'],
     }],
   },

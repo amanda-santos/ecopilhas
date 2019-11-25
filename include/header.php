@@ -118,7 +118,7 @@ if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
         <!-- seções de páginas -->
         <?php
         $sqlSecaoPaginas = "SELECT idSecaoPaginas, titulo 
-                              FROM SecaoPaginas 
+                              FROM ecopilhas.SecaoPaginas 
                               WHERE exibir = 1";
 
         $resultSecaoPaginas = $con->query($sqlSecaoPaginas);

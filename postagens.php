@@ -27,13 +27,13 @@
       echo $tituloSecao; 
 
       if (isset($_SESSION['login'])){
-        if ($_SESSION['tipo'] == '1') { // 
+        //if ($_SESSION['tipo'] == '1') { // 
       ?>
           <div class="float-right">
             <a class="btn btn-primary btn-block" href="cadastrarPost.php?id=<?php echo $idSecao; ?>"><i class="fas fa-plus"></i>  Cadastrar nova postagem</a>
           </div>
       <?php
-        }
+        //}
       }
       ?>
 
