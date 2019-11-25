@@ -245,6 +245,52 @@ if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
         ?>
 
         <!-- fim seções de postagens -->
+        <!-- seções -->
+
+ <?php
+
+    $sqlSecao = "SELECT idSecao, nome FROM ecopilhas.Secao WHERE exibir = 1;";
+
+    $resultSecao = $con->query($sqlSecao);
+
+    if ($resultSecao->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+      while ($exibirSecao = $resultSecao->fetch_assoc()){
+        $idSecao = $exibirSecao["idSecao"];
+        $nomeSecao = $exibirSecao["nome"];
+  ?>
+
+  <li class="nav-item">
+    <a class="nav-link" href="secao.php?id=<?php echo $idSecao;?>" id="navLink">
+
+      <?php 
+
+      echo $nomeSecao;
+
+      if (isset($_SESSION['login'])){
+
+        if (isAdmin($_SESSION['tipo'])){
+
+          $sqlSecaoPendente = "SELECT aprovacao FROM ecopilhas.SecaoPendente WHERE aprovacao = 0 AND idSecaoPendente = " . $idSecao;
+
+          $resultSecaoPendente = $con->query($sqlSecaoPendente);
+
+          if ($resultSecaoPendente->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+      ?>
+            <span class="badge badge-danger">1</span>
+      <?php
+          }
+        }
+      }
+      ?>
+    </a>
+  </li>
+
+  <?php
+      } // fim while
+    }
+  ?>
+
+<!-- fim seções -->
 
         <li class="nav-item">
           <a class="nav-link" href="cadastrarSolicitacao.php" id="navLink">Solicite um Coletor ou uma Palestra</a>
@@ -399,6 +445,96 @@ if (isset($_SESSION['login']) && isset($_SESSION['senha'])) {
     </div>
   </div>
 </div>
+
+    <!-- Modal - Seções -->
+    <div class="modal fade bd-example-modal-sm" id="secao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Seções</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            
+            <?php
+
+            $sqlSecaoModal = "SELECT idSecao, nome FROM ecopilhas.Secao";
+
+            $resultSecaoModal = $con->query($sqlSecaoModal);
+
+            if ($resultSecaoModal->num_rows > 0) { // Exibindo cada linha retornada com a consulta
+              while ($exibirSecaoModal = $resultSecaoModal->fetch_assoc()){
+                $idSecao = $exibirSecaoModal["idSecao"];
+                $nomeSecao = ucwords($exibirSecaoModal["nome"]);
+
+            ?>
+                <label class="control-label col-sm-12" for="nomeSecao">
+                  <?php echo $nomeSecao; ?>
+                  <a href="editarSecaoAdmin.php?id=<?php echo $idSecao; ?>">
+                    <i class="far fa-edit"></i>
+                  </a>
+                </label>
+            <?php
+                } // fim while SecaoPaginas
+              } // fim if SecaoPaginas
+            ?>
+
+            <div class="col-md-12"> 
+              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#cadastrarSecao">
+                <i class="fas fa-plus"></i>  
+                Cadastrar Nova Seção
+              </button>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal - Cadastrar Seção-->
+    <div class="modal fade" id="cadastrarSecao" tabindex="-1" role="dialog" aria-labelledby="cadastrarSecao" aria-hidden="true">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="secaoPaginasLabel">Cadastrar Nova Seção</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+          <form class="form-horizontal" action="inserirSecao.php" method="post" data-toggle="validator">
+
+              <div class="form-group">
+                <label class="control-label col-sm-12" for="titulo">Título:</label>
+                <div class="col-sm-12">
+                  <input required type="text" class="form-control" id="titulo" name="titulo">
+                </div>
+              </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <input type="submit" class="btn btn-primary" value="Cadastrar" name="cadastrar"></input>
+          </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
 
 
 <!-- Modal - Seções de Postagens -->
