@@ -78,6 +78,14 @@
 
     <!-- barra lateral -->
     <ul class="sidebar navbar-nav">
+
+      <li class="nav-item">
+          <a class="nav-link" href="indexAdmin.php">
+            <i class="fas fa-chart-pie"></i>
+            <span>Gráficos</span>
+          </a>
+      </li>
+
       <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="marcas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-battery-full"></i>
@@ -86,7 +94,6 @@
             <div class="dropdown-menu" aria-labelledby="marcas">
               <a class="dropdown-item" href="cadastrarMarca.php">Cadastrar Marca</a>
               <a class="dropdown-item" href="exibirMarca.php">Exibir Marcas</a>
-              <a class="dropdown-item" href="relatorioMarca.php">Relatório</a>
             </div>
           </li>
       <li class="nav-item dropdown">

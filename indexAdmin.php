@@ -93,7 +93,7 @@ if (isset($_SESSION['login'])){
   } //fim if
 
   $sqlPeso2019 = "SELECT SUM(pesoTotal) AS 'peso2019' 
-                    FROM ecopilhas.Triagem WHERE data >= '2019-01-01'and data <= '2019-12-31';";
+                    FROM ecopilhas.Triagem WHERE data >= '2019-01-01'and data <= '2019-11-20';";
   $resultPeso2019 = $con->query($sqlPeso2019);
   if ($resultPeso2019->num_rows > 0){
     while ($exibirPeso2019 = $resultPeso2019->fetch_assoc()){
@@ -110,9 +110,9 @@ if (isset($_SESSION['login'])){
 <input type="text" id="numJapao" hidden value="<?php echo $numJapao; ?>">
 <input type="text" id="numEUA" hidden value="<?php echo $numEUA; ?>">
 <input type="text" id="numOutros" hidden value="<?php echo $numOutros; ?>">
-<input type="text" id="peso2017" hidden value="<?php echo $peso2017; ?>">
-<input type="text" id="peso2018" hidden value="<?php echo $peso2018; ?>">
-<input type="text" id="peso2019" hidden value="<?php echo $peso2019; ?>">
+<input type="text" id="peso2017" hidden value="<?php echo round($peso2017); ?>">
+<input type="text" id="peso2018" hidden value="<?php echo round($peso2018); ?>">
+<input type="text" id="peso2019" hidden value="<?php echo round($peso2019); ?>">
 
 
 <!-- Breadcrumbs-->

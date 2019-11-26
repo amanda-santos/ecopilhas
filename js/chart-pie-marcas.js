@@ -16,7 +16,7 @@ var marcas = new Chart(ctx, {
     labels: ["Brasil", "Japão", "China", "EUA", "Outros"],
     datasets: [{
       data: [numBrasil.value, numJapao.value, numChina.value, numEUA.value, numOutros.value],
-      backgroundColor: ['rgb(255, 99, 132)','rgb(255, 159, 64)','rgb(255, 205, 86)','rgb(75, 192, 192)','rgb(54, 162, 235)'],
+      backgroundColor: ['rgb(0,0,205)','rgb(0,100,0)','rgb(255,0,0)','rgb(255,255,0)','rgb(0,206,209)'],
     }],
   },
 });

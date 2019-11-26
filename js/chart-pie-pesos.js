@@ -13,8 +13,8 @@ var vinculo = new Chart(ctx, {
   data: {
     labels: ["2017", "2018", "2019"],
     datasets: [{
-      data: [pesos2017.value, pesos2018.value,pesos2019],
-      backgroundColor: ['#007bff', '#dc3545'],
+      data: [pesos2017.value, pesos2018.value,pesos2019.value],
+      backgroundColor: ['rgb(0,0,205)','rgb(0,100,0)','rgb(255,0,0)'],
     }],
   },
 });
