@@ -1,0 +1,2 @@
+src/mail/*
+!src/mail/.gitkeep
