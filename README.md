@@ -13,7 +13,7 @@
   <a href="#-contributing">Como contribuir?</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-## 💻 Techs
+## 💻 Tecnologias
 
 Este projeto foi desenvolvido com as seguintes tecnologias:
 
